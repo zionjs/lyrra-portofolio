@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lyrra-MD - Bot WhatsApp Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a56db;
+            --primary-dark: #1e3a8a;
+            --secondary: #111827;
+            --accent: #3b82f6;
+            --text-light: #f3f4f6;
+            --text-dark: #1f2937;
+            --card-bg: rgba(30, 41, 59, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--secondary) 0%, #0f172a 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(17, 24, 39, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        .logo i {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            padding: 150px 0 100px;
+            text-align: center;
+            background: linear-gradient(rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.9)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: #d1d5db;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .section-title p {
+            color: #9ca3af;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #d1d5db;
+        }
+
+        .highlight {
+            background: linear-gradient(to right, var(--secondary), var(--primary-dark));
+            padding: 80px 0;
+        }
+
+        .highlight-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .highlight-text {
+            flex: 1;
+        }
+
+        .highlight-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-text p {
+            margin-bottom: 1.5rem;
+            color: #d1d5db;
+        }
+
+        .highlight-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .highlight-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-text {
+            color: #d1d5db;
+        }
+
+        .demo {
+            text-align: center;
+        }
+
+        .demo-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .demo-content p {
+            margin-bottom: 2rem;
+            color: #d1d5db;
+        }
+
+        .qr-code {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .qr-code img {
+            max-width: 200px;
+        }
+
+        .contact {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            width: 50px;
+            height: 50px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        footer {
+            background: var(--secondary);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .highlight-content {
+                flex-direction: column;
+            }
+
+            .contact {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    <span>Lyrra-MD</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#features">Fitur</a>
+                    <a href="#highlight">Keunggulan</a>
+                    <a href="#demo">Demo</a>
+                    <a href="#contact">Kontak</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Lyrra-MD Bot WhatsApp</h1>
+            <p>Bot WhatsApp multifungsi dengan 1400+ fitur aktif, keamanan tingkat tinggi, dan performa optimal 24/7. Solusi lengkap untuk otomatisasi WhatsApp Anda.</p>
+            <a href="#demo" class="btn">Coba Demo</a>
+            <a href="#contact" class="btn btn-outline">Hubungi Kami</a>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Fitur Unggulan</h2>
+                <p>Lyrra-MD dilengkapi dengan berbagai fitur canggih untuk memenuhi kebutuhan komunikasi dan otomatisasi WhatsApp Anda</p>
+            </div>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Security Groups</h3>
+                    <p>Jaga keamanan grup Anda 24 jam dengan sistem perlindungan otomatis terhadap spam, link berbahaya, dan konten tidak diinginkan.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Integrasi Panel Pterodactyl</h3>
+                    <p>Terintegrasi dengan panel Pterodactyl untuk 2 server, memastikan performa optimal dan manajemen yang mudah.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mouse-pointer"></i>
+                    </div>
+                    <h3>Support Semua Type Button</h3>
+                    <p>Mendukung semua jenis button WhatsApp termasuk CTA URL, CTA Copy, dan Quick Reply untuk interaksi yang lebih dinamis.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Auto AI Responsif</h3>
+                    <p>Dilengkapi dengan kecerdasan buatan yang responsif dan akurat untuk memberikan pengalaman pengguna yang optimal.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3>Edit Image Sesuai Keinginan</h3>
+                    <p>Fitur pengeditan gambar yang lengkap memungkinkan Anda memodifikasi gambar sesuai kebutuhan langsung dari WhatsApp.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Connect via Pairing Kode</h3>
+                    <p>Sistem koneksi yang mudah dengan pairing code untuk memastikan keamanan dan kemudahan penggunaan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="highlight" id="highlight">
+        <div class="container">
+            <div class="highlight-content">
+                <div class="highlight-text">
+                    <h2>Mengapa Memilih Lyrra-MD?</h2>
+                    <p>Lyrra-MD adalah solusi bot WhatsApp paling lengkap dengan lebih dari 1400 fitur aktif yang terus diperbarui. Dengan sistem keamanan tingkat tinggi dan performa yang stabil, Lyrra-MD siap membantu otomatisasi bisnis dan komunikasi Anda.</p>
+                    <p>Dibangun dengan teknologi terkini, Lyrra-MD menawarkan pengalaman pengguna yang mulus dengan antarmuka yang intuitif dan dukungan teknis yang responsif.</p>
+                    <a href="#contact" class="btn">Dapatkan Akses</a>
+                </div>
+                <div class="highlight-image">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=700&q=80" alt="Lyrra-MD Bot Interface">
+                </div>
+            </div>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">1400+</div>
+                    <div class="stat-text">Fitur Aktif</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-text">Jaga Grup</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-text">Anti Error</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2</div>
+                    <div class="stat-text">Server Terintegrasi</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="demo">
+        <div class="container">
+            <div class="section-title">
+                <h2>Demo & Akses</h2>
+                <p>Bergabunglah dengan grup demo untuk melihat langsung kemampuan Lyrra-MD</p>
+            </div>
+            <div class="demo">
+                <div class="demo-content">
+                    <p>Scan QR code berikut atau klik tombol di bawah untuk bergabung dengan grup demo Lyrra-MD dan lihat langsung fitur-fitur canggih yang tersedia.</p>
+                    <div class="qr-code">
+                        <!-- Placeholder untuk QR Code -->
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://chat.whatsapp.com/IZERnZql3Lp5OsvvHV9Yab" alt="QR Code Grup Demo">
+                    </div>
+                    <p>Atau klik tombol di bawah untuk langsung bergabung:</p>
+                    <a href="https://chat.whatsapp.com/IZERnZql3Lp5OsvvHV9Yab" class="btn" target="_blank">Bergabung dengan Grup Demo</a>
+                    <p class="copyright" style="margin-top: 2rem;">*Pengguna harus memiliki akses dari owner untuk menggunakan bot secara penuh</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Kontak & Informasi</h2>
+                <p>Hubungi kami untuk informasi lebih lanjut atau jika Anda membutuhkan bantuan</p>
+            </div>
+            <div class="contact">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div>
+                            <h3>GitHub</h3>
+                            <p><a href="https://github.com/zionjs" target="_blank">github.com/zionjs</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <h3>WhatsApp</h3>
+                            <p><a href="https://wa.me/6283191939584" target="_blank">+62 831-9193-9584</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                        <div>
+                            <h3>YouTube</h3>
+                            <p><a href="https://www.youtube.com/@kyzocode2.009" target="_blank">@kyzocode2.009</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h3>Email</h3>
+                            <p><a href="mailto:rizkysaputra4224@gmail.com">rizkysaputra4224@gmail.com</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com/zionjs" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://wa.me/6283191939584" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.youtube.com/@kyzocode2.009" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="mailto:rizkysaputra4224@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            <div class="footer-links">
+                <a href="#features">Fitur</a>
+                <a href="#highlight">Keunggulan</a>
+                <a href="#demo">Demo</a>
+                <a href="#contact">Kontak</a>
+            </div>
+            <p class="copyright">© 2023 Lyrra-MD Bot WhatsApp. All rights reserved. | Pengguna harus memiliki akses dari owner</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling untuk navigasi
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Efek scroll untuk navbar
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(17, 24, 39, 0.95)';
+            } else {
+                header.style.background = 'rgba(17, 24, 39, 0.9)';
+            }
+        });
+    </script>
+</body>
+</html>
